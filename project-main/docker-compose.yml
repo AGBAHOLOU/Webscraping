@@ -12,6 +12,7 @@ services:
       MYSQL_DATABASE: comparatordb0
     volumes:
       - ./bdd/data:/var/lib/mysql
+      - ./initdb:/docker-entrypoint-initdb.d
     container_name: bdd
     ports:
       - "3308:3306"

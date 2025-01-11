@@ -1,3 +1,1 @@
-# Ignorer les fichiers générés par MySQL
-bdd/data/
-
+*.sock
