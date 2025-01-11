@@ -16,11 +16,9 @@ DUPEFILTER_DEBUG = True
 DOWNLOAD_DELAY = 2
 CONCURRENT_REQUESTS_PER_DOMAIN = 8
 
-
-
 # Configure pipelines
 ITEM_PIPELINES = {
-    "price.pipelines.ProjetPipeline": 300,  # Customize pipeline if needed
+    "price.pipelines.MySQLPipeline": 300,  
 }
 
 # AutoThrottle configuration
@@ -49,5 +47,3 @@ LOG_LEVEL = "INFO"
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
-
-

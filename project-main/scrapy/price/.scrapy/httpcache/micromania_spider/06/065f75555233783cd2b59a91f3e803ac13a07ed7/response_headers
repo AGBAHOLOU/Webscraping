@@ -1,30 +1,30 @@
-Content-Length: 38589
+Content-Length: 38594
 Content-Type: text/html;charset=UTF-8
 Accept-Ranges: bytes
 X-Content-Type-Options: nosniff
 Content-Security-Policy: frame-ancestors 'self'
-X-Dw-Request-Base-Id: 0EHNkbbugWcBAAB_
+X-Dw-Request-Base-Id: udxmcVLHgmcBAAB_
 Cache-Control: no-cache, no-store, must-revalidate
 Pragma: no-cache
 Expires: Thu, 01 Dec 1994 16:00:00 GMT
 Cf-Cache-Status: DYNAMIC
-Cf-Ray: 900507adff562a11-CDG
-X-Akamai-Transformed: 9 - 0 pmb=mRUM,2
+Cf-Ray: 90079c238c2f6eba-CDG
+X-Akamai-Transformed: 9 36804 0 pmb=mRUM,2
 Content-Encoding: gzip
-Date: Sat, 11 Jan 2025 12:50:00 GMT
+Date: Sat, 11 Jan 2025 20:20:53 GMT
 Vary: Accept-Encoding
-Set-Cookie: dwac_617967a10dd1c0cde4e5c82eaf=4-dvvf9EDIL6iJz4iC3GE8vJ4-b2CHqk7_I%3D|dw-only|||EUR|false|Europe%2FParis|true; Path=/; Secure; SameSite=None
-Set-Cookie: cqcid=bcF3alGvShlaQvfxJd6QJ06fLD; Path=/; Secure; SameSite=None
+Set-Cookie: dwac_617967a10dd1c0cde4e5c82eaf=Q3f28YJP_fqRpEoKe2nz9-D8lAizE6U4YZU%3D|dw-only|||EUR|false|Europe%2FParis|true; Path=/; Secure; SameSite=None
+Set-Cookie: cqcid=bd0Hvv0ixomzaJUkEbueRJGsNa; Path=/; Secure; SameSite=None
 Set-Cookie: cquid=||; Path=/; Secure; SameSite=None
-Set-Cookie: dwanonymous_91b17fb4f5f05919fb46ffc83d1b0b57=bcF3alGvShlaQvfxJd6QJ06fLD; Version=1; Comment="Demandware anonymous cookie for site Sites-Micromania-Site"; Max-Age=15552000; Expires=Thu, 10 Jul 2025 12:50:00 GMT; Path=/; Secure; SameSite=None
-Set-Cookie: sid=4-dvvf9EDIL6iJz4iC3GE8vJ4-b2CHqk7_I; Path=/; Secure; SameSite=None
+Set-Cookie: dwanonymous_91b17fb4f5f05919fb46ffc83d1b0b57=bd0Hvv0ixomzaJUkEbueRJGsNa; Version=1; Comment="Demandware anonymous cookie for site Sites-Micromania-Site"; Max-Age=15552000; Expires=Thu, 10 Jul 2025 20:20:52 GMT; Path=/; Secure; SameSite=None
+Set-Cookie: sid=Q3f28YJP_fqRpEoKe2nz9-D8lAizE6U4YZU; Path=/; Secure; SameSite=None
 Set-Cookie: __cq_dnt=0; Path=/; Secure; SameSite=None
 Set-Cookie: dw_dnt=0; Path=/; Secure; SameSite=None
-Set-Cookie: dwsid=uvMtYcKUzOSq-hEFwojzHJLdoTrL2LrCv4BjsWElRsthBzunoYGRr-gIHdIKaa9djTyZc5zm7sySNDIj9V_JzQ==; path=/; HttpOnly; Secure; SameSite=None
-Set-Cookie: AKA_A2=A; expires=Sat, 11-Jan-2025 13:50:00 GMT; path=/; domain=micromania.fr; secure; HttpOnly
+Set-Cookie: dwsid=AfwrPUhZIn1XDrdd9GGyfKJ3ScR5BXq_pz99ggmX2GjUHITXTZzrRkL2HFfl-mnlDc81LwMAFXPBonKuxfWbYA==; path=/; HttpOnly; Secure; SameSite=None
+Set-Cookie: AKA_A2=A; expires=Sat, 11-Jan-2025 21:20:53 GMT; path=/; domain=micromania.fr; secure; HttpOnly
 Server-Timing: cdn-cache; desc=MISS
-Server-Timing: edge; dur=21
-Server-Timing: origin; dur=611
-Server-Timing: ak_p; desc="1736599799983_1600413333_124444783_66071_13299_1_0_-";dur=1
+Server-Timing: edge; dur=31
+Server-Timing: origin; dur=876
+Server-Timing: ak_p; desc="1736626852390_1600453780_193394426_91136_10713_1_0_-";dur=1
 Link: <https://www.micromania.fr/on/demandware.static/Sites-Micromania-Site/-/default/v1736566435729/fonts/FuturaPT-Bold.woff2>;rel="preload";as="font";type="font/woff2";crossorigin,<https://www.micromania.fr/on/demandware.static/Sites-Micromania-Site/-/default/v1736566435729/fonts/Eina01-SemiBold.woff2>;rel="preload";as="font";type="font/woff2";crossorigin,<https://www.micromania.fr/on/demandware.static/Sites-Micromania-Site/-/default/v1736566435729/fonts/FuturaPT-Demi.woff2>;rel="preload";as="font";type="font/woff2";crossorigin,<https://www.micromania.fr/on/demandware.static/Sites-Micromania-Site/-/default/v1736566435729/fonts/FuturaPT-Book.woff2>;rel="preload";as="font";type="font/woff2";crossorigin,<https://www.micromania.fr/on/demandware.static/Sites-Micromania-Site/-/default/v1736566435729/fonts/Eina01-Regular.woff2>;rel="preload";as="font";type="font/woff2";crossorigin
 Link: <https://d1m6l9dfulcyw7.cloudfront.net>;rel="preconnect",<https://builder-sdks.bryj.ai>;rel="preconnect",<https://apps.bazaarvoice.com>;rel="preconnect",<https://cdn.cquotient.com>;rel="preconnect",<https://consent.trustarc.com>;rel="preconnect"

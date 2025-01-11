@@ -1,11 +1,11 @@
-Date: Sat, 11 Jan 2025 12:43:33 GMT
+Date: Sat, 11 Jan 2025 18:46:50 GMT
 Content-Type: text/html; charset=UTF-8
 Server: nginx
 Cache-Control: public, s-maxage=7200
-Set-Cookie: device_view=full; expires=Tue, 11 Feb 2025 12:43:33 GMT; Max-Age=2678400; path=/; domain=easycash.fr; secure; samesite=lax
+Set-Cookie: device_view=full; expires=Tue, 11 Feb 2025 18:46:50 GMT; Max-Age=2678400; path=/; domain=easycash.fr; secure; samesite=lax
 X-Frame-Options: SAMEORIGIN
 Content-Encoding: gzip
-X-Varnish: 44274823
+X-Varnish: 45341668
 Age: 0
 Via: 1.1 varnish-app-0 (Varnish/7.4)
 Accept-Ranges: bytes
