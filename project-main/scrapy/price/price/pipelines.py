@@ -30,7 +30,7 @@ class ProjetPipeline:
 
 
 # Pipeline pour enregistrer les items des sites dans la base de données.
-class MysqlPipeline:
+class MySQLPipeline:
     def __init__(self):
         self.connexion = connector.connect(
             host="mysql",
@@ -39,75 +39,63 @@ class MysqlPipeline:
             database="comparatordb0"
         )
         self.cursor = self.connexion.cursor()
-
+ 
     def process_item(self, item, spider):
-
-        # Get the Website ID
-        website_result = self.select_one("website", "idwebsite", {"website_name": item['site']})
-
-        # If Website ID doesn't exit => insert
-        if website_result is None:
-            self.insert("website", {"website_name": item['site']})
-            website_result = self.select_one("website", "idwebsite", {"website_name": item['site']})
-
-        # Get the Game ID
-        game_result = self.select_one("game", "idgame", {"game_name": item['nom']}) 
-
-        # If Game ID doesn't exist => insert
+        # Vérification ou insertion dans la table "game"
+        game_result = self.select_one("game", "idgame", {"game_name": item['name']})
+ 
         if game_result is None:
-            self.insert("game", {"game_name": item['nom'], "game_type": item["type"]})
-            game_result = self.select_one("game", "idgame", {"game_name": item['nom']})
-
-        # Get the price for the key(Game ID, Website ID)
-        price_result = self.select_one("price", "idprice", {"price_idgame": game_result[0], "price_idwebsite": website_result[0]})
-        
-        # If doesn't exist => insert
+            self.insert("game", {"game_name": item['name']})
+            game_result = self.select_one("game", "idgame", {"game_name": item['name']})
+ 
+        # Exemple de gestion avec un site par défaut
+        website_result = self.select_one("website", "idwebsite", {"website_name": "default_site"})
+        if website_result is None:
+            self.insert("website", {"website_name": "default_site"})
+            website_result = self.select_one("website", "idwebsite", {"website_name": "default_site"})
+ 
+        # Vérification ou insertion dans la table "price"
+        price_result = self.select_one("price", "idprice", {
+            "price_idgame": game_result[0],
+            "price_idwebsite": website_result[0]
+        })
+ 
         if price_result is None:
-            self.insert("price", {"price_idgame": game_result[0], "price_idwebsite": website_result[0], "price_value": item["prix"], 
-            "price_insertdate": datetime.now(), "price_url": item['url']})
-        # Else => Update
-        elif price_result[0] != item["prix"]:
-            self.update("price", {"price_value": item["prix"], "price_updatedate": datetime.now()}, 
-            {"price_idgame": game_result[0], "price_idwebsite": website_result[0]})
-
-        return item 
-
+            self.insert("price", {
+                "price_idgame": game_result[0],
+                "price_idwebsite": website_result[0],
+                "price_value": item["price"],
+                "price_insertdate": datetime.now(),
+                "price_url": item['url']
+            })
+        else:
+            self.update("price", {
+                "price_value": item["price"],
+                "price_updatedate": datetime.now()
+            }, {
+                "price_idgame": game_result[0],
+                "price_idwebsite": website_result[0]
+            })
+ 
+        return item
+ 
     def insert(self, table, values):
-        # Create the placeholders string
         placeholders = ', '.join(['%s'] * len(values))
-        
-        # Create the INSERT query
         query = "INSERT INTO {} ({}) VALUES ({})".format(table, ', '.join(values.keys()), placeholders)
-
-        # Execute the prepared statement
         self.cursor.execute(query, list(values.values()))
-        
-        # Commit the transaction
         self.connexion.commit()
-    
-    def update(self, table, set, where):
-        # Create the SET clause
-        set_clause = ', '.join(['{} = %s'.format(col) for col in set])
-
-        # Create the UPDATE query
-        query = "UPDATE {} SET {} WHERE {}".format(table, set_clause, " AND ".join(['{} = %s'.format(col) for col in where]))
-        
-        # Execute the prepared statement
-        self.cursor.execute(query, list(set.values()) + list(where.values()))
-
-        # Commit the transaction
+ 
+    def update(self, table, set_values, where):
+        set_clause = ', '.join(['{} = %s'.format(col) for col in set_values])
+        where_clause = ' AND '.join(['{} = %s'.format(col) for col in where])
+        query = "UPDATE {} SET {} WHERE {}".format(table, set_clause, where_clause)
+        self.cursor.execute(query, list(set_values.values()) + list(where.values()))
         self.connexion.commit()
-
+ 
     def select_one(self, table, columns="*", where=None):
-        # Create the SELECT query
         query = "SELECT {} FROM {}".format(columns, table)
-    
-        # Add the WHERE part
         if where is not None:
             query += " WHERE {}".format(" AND ".join(['{} = %s'.format(col) for col in where]))
-
-        # Execute the prepared statement
-        self.cursor.execute(query, list(where.values()))
-        
-        # Return the value
+        self.cursor.execute(query, list(where.values()) if where else None)
         return self.cursor.fetchone()
+
