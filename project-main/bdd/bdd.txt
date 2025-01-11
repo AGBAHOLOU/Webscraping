@@ -5,10 +5,10 @@ mysql -u root -p
 => root
 
 Créer une base de données : 
-CREATE DATABASE comparatordb;
+CREATE DATABASE comparatordb0;
 
 Donner les accès à une base de données :
-GRANT ALL PRIVILEGES ON comparatordb.* TO 'user'@'%';
+GRANT ALL PRIVILEGES ON comparatordb0.* TO 'user'@'%';
 
 
 User :
@@ -16,7 +16,7 @@ mysql -u user -p
 => passwordUser0
 
 SHOW DATABASES;
-USE comparatordb;
+USE comparatordb0;
 SHOW TABLES;
 
 --------------------
@@ -27,7 +27,7 @@ système : MySQL
 serveur : mysql
 utilisateur : user
 password : passwordUser0
-base de données : comparatordb
+base de données : comparatordb0
 
 -----------------------
 
