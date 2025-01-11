@@ -1,0 +1,12 @@
+FROM debian
+ 
+RUN apt-get update -y
+RUN apt-get install python3-pip -y &&\
+pip install scrapy &&\
+pip install itemadapter &&\
+pip install mysql-connector-python
+ 
+#WORKDIR /price
+#RUN scrapy crawl pricespider_ej
+ 
+# scrapy startproject price
