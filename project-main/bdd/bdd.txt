@@ -1,0 +1,34 @@
+mysql bdd
+
+Admin :
+mysql -u root -p
+=> root
+
+Créer une base de données : 
+CREATE DATABASE comparatordb;
+
+Donner les accès à une base de données :
+GRANT ALL PRIVILEGES ON comparatordb.* TO 'user'@'%';
+
+
+User :
+mysql -u user -p
+=> passwordUser1
+
+SHOW DATABASES;
+USE comparatordb;
+SHOW TABLES;
+
+--------------------
+
+pour adminer (localhost:8080)
+
+système : MySQL
+serveur : mysql
+utilisateur : user
+password : passwordUser1
+base de données : comparatordb
+
+-----------------------
+
+docker-compose build --no-cache
