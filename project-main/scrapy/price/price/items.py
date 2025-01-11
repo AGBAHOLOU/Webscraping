@@ -14,5 +14,4 @@ class ProjetItem(scrapy.Item):
 class GameItem(scrapy.Item):
     name = scrapy.Field()
     price = scrapy.Field()
-    console = scrapy.Field()
     url = scrapy.Field()

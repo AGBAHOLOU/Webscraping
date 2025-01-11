@@ -13,7 +13,7 @@ GRANT ALL PRIVILEGES ON comparatordb.* TO 'user'@'%';
 
 User :
 mysql -u user -p
-=> passwordUser1
+=> passwordUser0
 
 SHOW DATABASES;
 USE comparatordb;
@@ -26,7 +26,7 @@ pour adminer (localhost:8080)
 système : MySQL
 serveur : mysql
 utilisateur : user
-password : passwordUser1
+password : passwordUser0
 base de données : comparatordb
 
 -----------------------
