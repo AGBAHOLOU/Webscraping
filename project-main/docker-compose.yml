@@ -1,0 +1,46 @@
+# Faire appel aux trois fichiers dockerfile
+
+version: '3.9'
+services:
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: passwordUser1
+      MYSQL_DATABASE: comparatordb
+    volumes:
+      - ./bdd/data:/var/lib/mysql
+    container_name: bdd
+    ports:
+      - "3308:3306"
+  
+  adminer:    
+    image: adminer
+    restart: always
+    depends_on:
+      - mysql
+    ports:      
+      - "8080:8080"
+
+  web:
+    build:
+      context: ./web
+    restart: always
+    ports:
+      - "8000:80"
+    container_name: apacheweb
+    volumes:
+      - ./web:/var/www/html
+
+
+  scrapy:
+    build:
+      context: ./scrapy
+    restart: always
+    container_name: scrapy
+    volumes:
+      - ./scrapy/price:/price
+    entrypoint: bin/sh
+    tty : true
