@@ -1,12 +1,28 @@
+
+# Utiliser l'image Debian comme base
 FROM debian
- 
-RUN apt-get update -y
-RUN apt-get install python3-pip -y &&\
-pip install scrapy &&\
-pip install itemadapter &&\
-pip install mysql-connector-python
- 
-#WORKDIR /price
-#RUN scrapy crawl pricespider_ej
- 
-# scrapy startproject price
+
+# Mettre à jour les paquets et installer Python et pip
+RUN apt-get update -y && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
+    && apt-get clean
+
+# Créer un environnement virtuel pour isoler les paquets Python
+RUN python3 -m venv /venv
+
+# Activer l'environnement virtuel et installer les dépendances Python
+RUN /venv/bin/pip install --upgrade pip && \
+    /venv/bin/pip install scrapy itemadapter mysql-connector-python
+
+# Ajouter le chemin de l'environnement virtuel au PATH
+ENV PATH="/venv/bin:$PATH"
+
+# Définir le répertoire de travail
+WORKDIR /price
+
+# Commande pour démarrer un spider Scrapy
+CMD ["scrapy", "crawl", "bonplans_easycash_spider"]
+
+

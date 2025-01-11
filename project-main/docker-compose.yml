@@ -22,7 +22,7 @@ services:
     depends_on:
       - mysql
     ports:      
-      - "8080:8080"
+      - "8088:8080"
  
   web:
     build:
@@ -42,6 +42,5 @@ services:
     container_name: scrapy
     volumes:
       - ./scrapy/price:/price
-    entrypoint: bin/sh
+    entrypoint: /bin/sh
     tty : true
- 

@@ -21,7 +21,7 @@ SHOW TABLES;
 
 --------------------
 
-pour adminer (localhost:8080)
+pour adminer (localhost:8088)
 
 système : MySQL
 serveur : mysql
@@ -32,3 +32,9 @@ base de données : comparatordb0
 -----------------------
 
 docker-compose build --no-cache
+
+
+
+
+
+

@@ -1,3 +1,5 @@
+index
+
 <?php
     include 'database.php';
 ?>
@@ -13,7 +15,7 @@
 </head>
 <body>
  
-    <h1>Comparateur de prix des jeux de société</h1>
+    <h1>Comparateur de prix des Consoles de jeu</h1>
  
 <?php
  
