@@ -16,10 +16,7 @@ DUPEFILTER_DEBUG = True
 DOWNLOAD_DELAY = 2
 CONCURRENT_REQUESTS_PER_DOMAIN = 8
 
-# Middleware configuration for Selenium
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy_selenium.SeleniumMiddleware': 800,  # Required for Scrapy-Selenium
-}
+
 
 # Configure pipelines
 ITEM_PIPELINES = {
@@ -52,6 +49,5 @@ LOG_LEVEL = "INFO"
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
-
 
 
