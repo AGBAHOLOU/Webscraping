@@ -18,7 +18,7 @@
 <?php
  
     // Connect to the database
-    $db = Database::getInstance('mysql', 'comparatordb', 'user', 'passwordUser1');
+    $db = Database::getInstance('mysql', 'comparatordb0', 'user', 'passwordUser0');
  
     // Select all rows from the game table
     #$games = $db->select('game', '*', '', 'game_name');
