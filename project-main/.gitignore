@@ -1,1 +1,3 @@
 *.sock
+# Ajouter cette ligne au fichier .gitignore
+.scrapy/
