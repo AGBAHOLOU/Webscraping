@@ -44,7 +44,7 @@ class MySQLPipeline:
             print("Connexion MySQL réussie")
         except Exception as e:
             print(f"Erreur de connexion MySQL : {e}")
-            self.connexion = None  # Ajoutez ceci pour éviter d'autres erreurs
+            self.connexion = None
 
     @staticmethod
     def clean_price(price):
@@ -61,17 +61,26 @@ class MySQLPipeline:
 
     def process_item(self, item, spider):
         spider.logger.info(f"Pipeline : Item reçu pour insertion : {item}")
-        
-        # Nettoyez le prix avant insertion
+
+        # Nettoyer le prix avant insertion
         if 'price' in item:
             item['price'] = self.clean_price(item['price'])
 
+        # Préparer l'insertion dans la base de données
         query = """
-        INSERT INTO articles (name, price, url)
-        VALUES (%s, %s, %s)
+        INSERT INTO articles (image, name, category, price, site, url)
+        VALUES (%s, %s, %s, %s, %s, %s)
         """
         try:
-            self.cursor.execute(query, (item['name'], item['price'], item['url']))
+            self.cursor.execute(query, (
+                item.get('image'),  # Assurez-vous que l'image est au format binaire
+                item.get('name'),
+                item.get('category', 'Unknown'),  # Valeur par défaut
+                item.get('price'),
+                item.get('site', 'Unknown'),  # Valeur par défaut
+                item.get('url'),
+                
+            ))
             self.connexion.commit()
             spider.logger.info(f"Item inséré avec succès : {item}")
         except Exception as e:
