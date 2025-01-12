@@ -15,3 +15,4 @@ class GameItem(scrapy.Item):
     name = scrapy.Field()
     price = scrapy.Field()
     url = scrapy.Field()
+    site = scrapy.Field()

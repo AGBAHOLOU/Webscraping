@@ -67,11 +67,11 @@ class MySQLPipeline:
             item['price'] = self.clean_price(item['price'])
 
         query = """
-        INSERT INTO articles (name, price, url)
-        VALUES (%s, %s, %s)
+        INSERT INTO articles (name, price, url, site)
+        VALUES (%s, %s, %s, %s)
         """
         try:
-            self.cursor.execute(query, (item['name'], item['price'], item['url']))
+            self.cursor.execute(query, (item['name'], item['price'], item['url'], item['site']))
             self.connexion.commit()
             spider.logger.info(f"Item inséré avec succès : {item}")
         except Exception as e:

@@ -1,30 +1,29 @@
-Content-Length: 38594
+Content-Length: 38616
 Content-Type: text/html;charset=UTF-8
 Accept-Ranges: bytes
 X-Content-Type-Options: nosniff
 Content-Security-Policy: frame-ancestors 'self'
-X-Dw-Request-Base-Id: udxmcVLHgmcBAAB_
+X-Dw-Request-Base-Id: udwcEcc5g2cBAAB_
 Cache-Control: no-cache, no-store, must-revalidate
 Pragma: no-cache
 Expires: Thu, 01 Dec 1994 16:00:00 GMT
 Cf-Cache-Status: DYNAMIC
-Cf-Ray: 90079c238c2f6eba-CDG
-X-Akamai-Transformed: 9 36804 0 pmb=mRUM,2
+Cf-Ray: 900c7c1d2840eba9-CDG
+X-Akamai-Transformed: 9 36827 0 pmb=mRUM,2
 Content-Encoding: gzip
-Date: Sat, 11 Jan 2025 20:20:53 GMT
+Date: Sun, 12 Jan 2025 10:32:50 GMT
 Vary: Accept-Encoding
-Set-Cookie: dwac_617967a10dd1c0cde4e5c82eaf=Q3f28YJP_fqRpEoKe2nz9-D8lAizE6U4YZU%3D|dw-only|||EUR|false|Europe%2FParis|true; Path=/; Secure; SameSite=None
-Set-Cookie: cqcid=bd0Hvv0ixomzaJUkEbueRJGsNa; Path=/; Secure; SameSite=None
+Set-Cookie: dwac_617967a10dd1c0cde4e5c82eaf=m8ItmqSRzHqdtFt5-faKuFssJVhBZ6QszwE%3D|dw-only|||EUR|false|Europe%2FParis|true; Path=/; Secure; SameSite=None
+Set-Cookie: cqcid=bcCKzcf9COEl3Giyd5oWKNM5ba; Path=/; Secure; SameSite=None
 Set-Cookie: cquid=||; Path=/; Secure; SameSite=None
-Set-Cookie: dwanonymous_91b17fb4f5f05919fb46ffc83d1b0b57=bd0Hvv0ixomzaJUkEbueRJGsNa; Version=1; Comment="Demandware anonymous cookie for site Sites-Micromania-Site"; Max-Age=15552000; Expires=Thu, 10 Jul 2025 20:20:52 GMT; Path=/; Secure; SameSite=None
-Set-Cookie: sid=Q3f28YJP_fqRpEoKe2nz9-D8lAizE6U4YZU; Path=/; Secure; SameSite=None
+Set-Cookie: dwanonymous_91b17fb4f5f05919fb46ffc83d1b0b57=bcCKzcf9COEl3Giyd5oWKNM5ba; Version=1; Comment="Demandware anonymous cookie for site Sites-Micromania-Site"; Max-Age=15552000; Expires=Fri, 11 Jul 2025 10:32:49 GMT; Path=/; Secure; SameSite=None
+Set-Cookie: sid=m8ItmqSRzHqdtFt5-faKuFssJVhBZ6QszwE; Path=/; Secure; SameSite=None
 Set-Cookie: __cq_dnt=0; Path=/; Secure; SameSite=None
 Set-Cookie: dw_dnt=0; Path=/; Secure; SameSite=None
-Set-Cookie: dwsid=AfwrPUhZIn1XDrdd9GGyfKJ3ScR5BXq_pz99ggmX2GjUHITXTZzrRkL2HFfl-mnlDc81LwMAFXPBonKuxfWbYA==; path=/; HttpOnly; Secure; SameSite=None
-Set-Cookie: AKA_A2=A; expires=Sat, 11-Jan-2025 21:20:53 GMT; path=/; domain=micromania.fr; secure; HttpOnly
+Set-Cookie: dwsid=sh4-fwcjfV4qQSWE-ccCr3LwNr3i1RUIePTno5FN87wdqXSe59r_OvDawJVAByvz3QOET3ZuxDe4-CqwFXOs7A==; path=/; HttpOnly; Secure; SameSite=None
+Set-Cookie: AKA_A2=A; expires=Sun, 12-Jan-2025 11:32:50 GMT; path=/; domain=micromania.fr; secure; HttpOnly
 Server-Timing: cdn-cache; desc=MISS
-Server-Timing: edge; dur=31
-Server-Timing: origin; dur=876
-Server-Timing: ak_p; desc="1736626852390_1600453780_193394426_91136_10713_1_0_-";dur=1
-Link: <https://www.micromania.fr/on/demandware.static/Sites-Micromania-Site/-/default/v1736566435729/fonts/FuturaPT-Bold.woff2>;rel="preload";as="font";type="font/woff2";crossorigin,<https://www.micromania.fr/on/demandware.static/Sites-Micromania-Site/-/default/v1736566435729/fonts/Eina01-SemiBold.woff2>;rel="preload";as="font";type="font/woff2";crossorigin,<https://www.micromania.fr/on/demandware.static/Sites-Micromania-Site/-/default/v1736566435729/fonts/FuturaPT-Demi.woff2>;rel="preload";as="font";type="font/woff2";crossorigin,<https://www.micromania.fr/on/demandware.static/Sites-Micromania-Site/-/default/v1736566435729/fonts/FuturaPT-Book.woff2>;rel="preload";as="font";type="font/woff2";crossorigin,<https://www.micromania.fr/on/demandware.static/Sites-Micromania-Site/-/default/v1736566435729/fonts/Eina01-Regular.woff2>;rel="preload";as="font";type="font/woff2";crossorigin
-Link: <https://d1m6l9dfulcyw7.cloudfront.net>;rel="preconnect",<https://builder-sdks.bryj.ai>;rel="preconnect",<https://apps.bazaarvoice.com>;rel="preconnect",<https://cdn.cquotient.com>;rel="preconnect",<https://consent.trustarc.com>;rel="preconnect"
+Server-Timing: edge; dur=25
+Server-Timing: origin; dur=824
+Server-Timing: ak_p; desc="1736677969447_1600413333_200926110_85103_10581_31_0_-";dur=1
+Link: <https://d1m6l9dfulcyw7.cloudfront.net>;rel="preconnect",<https://builder-sdks.bryj.ai>;rel="preconnect",<https://cdn.cquotient.com>;rel="preconnect"

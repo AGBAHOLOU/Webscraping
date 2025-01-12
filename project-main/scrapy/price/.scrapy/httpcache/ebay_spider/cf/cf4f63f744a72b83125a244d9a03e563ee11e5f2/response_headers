@@ -6,33 +6,33 @@ Accept-Ch: sec-ch-ua-model,sec-ch-ua-platform-version,sec-ch-ua-full-version
 Content-Type: text/html; charset=utf-8
 Cache-Control: private
 Pragma: no-cache
-Rlogid: t6pwvit%60d5%60jhs9%3Fuuskqba7ehmq%2B1402%3F%60%3D0ea(ktu%3D1-19456fa5dc3-0x2107
-X-Envoy-Upstream-Service-Time: 230
-X-Ebay-Mesh-Server-Pod-Ip: 10.185.106.66
-X-Ebay-Mesh-Server-Duration: 96
-X-Ebay-Mesh-Server-Start: 2025-01-11T20:07:16.161Z
+Rlogid: t6pwvit%60d5%60jhs9%3Fuuskqba7ehmq%2B1402%3F%60%3D0ea(3iugq-1945a05bfec-0x306
+X-Envoy-Upstream-Service-Time: 281
+X-Ebay-Mesh-Server-Pod-Ip: 10.98.77.142
+X-Ebay-Mesh-Server-Duration: 133
+X-Ebay-Mesh-Server-Start: 2025-01-12T10:18:33.833Z
 X-Ebay-Mesh-Server-Response-Flag: -
 Server: ebay-proxy-server
-X-Ebay-Mesh-Gw-Name: istioingressgateway-production-slcaz03-04
-X-Ebay-Mesh-Gw-Pod-Name: istio-ingressgateway-04-5df8fff869-8skhb
-X-Ebay-Mesh-Gw-Pod-Ip: 10.90.4.4
-X-Ebay-Mesh-Gw-Upstream-Duration: 97
-X-Ebay-Mesh-Gw-Duration: 97
-X-Ebay-Mesh-Gw-Start: 2025-01-11T20:07:16.161Z
+X-Ebay-Mesh-Gw-Name: istioingressgateway-production-rnoaz06-02
+X-Ebay-Mesh-Gw-Pod-Name: istio-ingressgateway-02-c6ddbb5d5-m2z9m
+X-Ebay-Mesh-Gw-Pod-Ip: 10.81.246.79
+X-Ebay-Mesh-Gw-Upstream-Duration: 134
+X-Ebay-Mesh-Gw-Duration: 134
+X-Ebay-Mesh-Gw-Start: 2025-01-12T10:18:33.833Z
 X-Ebay-Mesh-Gw-Response-Flag: -
 X-Ebay-Tlb-Host: Not Found
 X-Ebay-Tlb-Duration: 201
 Content-Encoding: gzip
-Date: Sat, 11 Jan 2025 20:07:16 GMT
+Date: Sun, 12 Jan 2025 10:18:34 GMT
 Vary: Accept-Encoding
-Set-Cookie: nonsession=BAQAAAZJU03gwAAaAADMABWlkAvQ5MTM4MADKACBrRTZ0NTZlOWE4YTkxOTQwYWIzYTIxMzg3MGFjZmZmMGJkYTcAywACZ4LWfDE0zoSjJjjUwwG3M+r3n1XIHrYBojM*; Domain=.ebay.fr; Path=/; Expires=Mon, 11 Jan 2027 20:07:16 GMT; HttpOnly; Secure
-Set-Cookie: s=CgAD4ACBnhBytNTZlOWE4YTkxOTQwYWIzYTIxMzg3MGFjZmZmMGJkYTeW8mz5; Domain=.ebay.fr; Path=/; HttpOnly; Secure
-Set-Cookie: dp1=bbl/FR6b453674^; Domain=.ebay.fr; Path=/; Expires=Mon, 11 Jan 2027 20:07:16 GMT; Secure
+Set-Cookie: nonsession=BAQAAAZRXz2gmAAaAADMABWlkynk3NTAwMQDKACBrRf35NWEwNDE3ZDcxOTQwYTcyNDgyOTkyYTYzZmZlZDE1NTgAywACZ4OeATE0oXtpzhF3tW+vGGmFUWyowxGMLDg*; Domain=.ebay.fr; Path=/; Expires=Tue, 12 Jan 2027 10:18:33 GMT; HttpOnly; Secure
+Set-Cookie: s=CgAD4ACBnhOgNNWEwNDE3ZDcxOTQwYTcyNDgyOTkyYTYzZmZlZDE1NThiUm3f; Domain=.ebay.fr; Path=/; HttpOnly; Secure
+Set-Cookie: dp1=bbl/FR6b45fdf9^; Domain=.ebay.fr; Path=/; Expires=Tue, 12 Jan 2027 10:18:33 GMT; Secure
 Set-Cookie: ebay=%5Esbf%3D%23000000%5E; Domain=.ebay.fr; Path=/; Secure
-Set-Cookie: ns1=BAQAAAZJU03gwAAaAANgAU2lkAvRjNjl8NjAxXjE3MzY2MjQ5NDEyOTReXjFeM3wyfDV8NHw3fDEwfDQyfDQzfDExXl5eNF4zXjEyXjEyXjJeMV4xXjBeMV4wXjFeNjQ0MjQ1OTA3NWUiQP9UeYc4Y88wHtteON5ochR+; Domain=.ebay.fr; Path=/; Expires=Sun, 11 Jan 2026 20:07:16 GMT; HttpOnly; Secure
-Set-Cookie: __uzma=ddcac849-a900-4ac8-872d-e7c2034a4cd1; Path=/; Domain=.ebay.fr; Expires=Thu, 10 Jul 2025 20:07:16 UTC
-Set-Cookie: __uzmb=1736624941; Path=/; Domain=.ebay.fr; Expires=Thu, 10 Jul 2025 20:07:16 UTC
-Set-Cookie: __uzmc=192024971415; Path=/; Domain=.ebay.fr; Expires=Thu, 10 Jul 2025 20:07:16 UTC
-Set-Cookie: __uzmd=1736626036; Path=/; Domain=.ebay.fr; Expires=Thu, 10 Jul 2025 20:07:16 UTC
-Set-Cookie: __uzme=1187; Path=/; Domain=.ebay.fr; Expires=Thu, 10 Jul 2025 20:07:16 UTC
-Set-Cookie: __uzmf=7f6000ce3e0105-d0a6-41d9-bc8f-2222db99959a17366249411961094962-697486148c5e2e7849; Path=/; Domain=.ebay.fr; Expires=Thu, 10 Jul 2025 20:07:16 UTC
+Set-Cookie: ns1=BAQAAAZRXz2gmAAaAANgAU2lkynljNjl8NjAxXjE3MzY2NzcwMDUzMzReXjFeM3wyfDV8NHw3fDEwfDQyfDQzfDExXl5eNF4zXjEyXjEyXjJeMV4xXjBeMV4wXjFeNjQ0MjQ1OTA3NSME8VFzGE85WLDxe0Wp+gRmoSGO; Domain=.ebay.fr; Path=/; Expires=Mon, 12 Jan 2026 10:18:33 GMT; HttpOnly; Secure
+Set-Cookie: __uzma=7e7030e4-4cac-432e-9f56-495979311723; Path=/; Domain=.ebay.fr; Expires=Fri, 11 Jul 2025 10:18:33 UTC
+Set-Cookie: __uzmb=1736677005; Path=/; Domain=.ebay.fr; Expires=Fri, 11 Jul 2025 10:18:33 UTC
+Set-Cookie: __uzmc=718584958056; Path=/; Domain=.ebay.fr; Expires=Fri, 11 Jul 2025 10:18:33 UTC
+Set-Cookie: __uzmd=1736677113; Path=/; Domain=.ebay.fr; Expires=Fri, 11 Jul 2025 10:18:33 UTC
+Set-Cookie: __uzme=8390; Path=/; Domain=.ebay.fr; Expires=Fri, 11 Jul 2025 10:18:33 UTC
+Set-Cookie: __uzmf=7f60009673d95d-cd59-4041-9ea9-b84ddc02f4831736677005248108576-1bdb92c862d8ae4a49; Path=/; Domain=.ebay.fr; Expires=Fri, 11 Jul 2025 10:18:33 UTC
