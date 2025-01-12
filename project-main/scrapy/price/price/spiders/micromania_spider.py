@@ -47,6 +47,9 @@ class MicromaniaSpider(scrapy.Spider):
             else:
                 item['url'] = None
 
+            # Ajouter le nom du site
+            item['site'] = self.allowed_domains[0]  
+
             yield item
 
         # Gestion de la pagination

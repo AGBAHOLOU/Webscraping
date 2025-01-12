@@ -16,6 +16,8 @@ class BonPlansEasyCashSpider(scrapy.Spider):
             name_text = game.xpath('./div[@class="infos-container"]/div/div/h2/a/text()').get()
             cleaned_name = name_text.replace("Jeux Vidéo","").strip() if name_text else None
 
+            
+
             if "Game Gear" in cleaned_name:
                 cleaned_name = cleaned_name.replace("Game Gear","")
             if "Lynx" or "Atari 2600" or "atari 2600" in cleaned_name:
@@ -43,7 +45,8 @@ class BonPlansEasyCashSpider(scrapy.Spider):
             price_euro = f"{price}€" if price else None
             new_item_game['price'] = price_euro
             new_item_game['url'] = game.xpath('./@data-href').get()
-
+            # Ajoutez le nom du site
+            new_item_game['site'] = self.allowed_domains[0] 
             yield new_item_game
 
         next = response.xpath('//li[@class="next"]/a/@href').get()

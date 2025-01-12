@@ -38,6 +38,8 @@ class EbaySpider(scrapy.Spider):
             item['price'] = product.xpath('.//span[contains(@class, "s-item__price")]/text()').get()
             relative_url = product.xpath('.//a[contains(@class, "s-item__link")]/@href').get()
             item['url'] = response.urljoin(relative_url)
+            # Ajouter le nom du site
+            item['site'] = self.allowed_domains[0] 
             yield item
 
         # Gestion de la pagination
