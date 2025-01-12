@@ -7,28 +7,36 @@ def uniformize_name_and_category(name):
     categories = []
     uniform_name = None
 
-    # Sony
-    if any(term in name for term in ["ps5", "playstation 5", "playstation5"]):
+    # Sony - PlayStation
+    if any(term in name for term in [
+        "ps5", "playstation 5", "playstation5", "playstation 5 slim", "ps5 slim",
+        "playstation 5 digital edition", "ps5 digital edition", "playstation 5 pro", "ps5 pro",
+        "ps5 standard", "playstation 5 (modèle slim)", "playstation 5 - reconditionné", "playstation 5 - occasion"
+    ]):
         uniform_name = "PlayStation 5"
         categories.append("Sony")
-    elif any(term in name for term in ["ps4", "playstation 4", "playstation4"]):
+    elif any(term in name for term in [
+        "ps4", "playstation 4", "playstation4", "ps4 slim", "playstation 4 slim",
+        "ps4 pro", "playstation 4 pro", "ps4 slim noire", "ps4 slim blanche", "ps4 pro noire", "ps4 pro blanche"
+    ]):
         uniform_name = "PlayStation 4"
         categories.append("Sony")
-    elif any(term in name for term in ["ps3", "playstation 3", "playstation3"]):
+    elif any(term in name for term in [
+        "ps3", "playstation 3", "playstation3", "ps3 slim", "playstation 3 slim", "ps3 ultra slim"
+    ]):
         uniform_name = "PlayStation 3"
-        categories.append("Sony")
-    elif any(term in name for term in ["ps2", "playstation 2", "playstation2"]):
-        uniform_name = "PlayStation 2"
         categories.append("Sony")
     elif any(term in name for term in ["ps1", "playstation 1", "playstation classic", "ps one"]):
         uniform_name = "PlayStation 1"
         categories.append("Sony")
 
-    # Microsoft
-    elif any(term in name for term in ["xbox series x", "xbox series s", "xbox series"]):
+    # Microsoft - Xbox
+    elif any(term in name for term in [
+        "xbox series x", "xbox series s", "xbox series", "xbox series x digital edition", "xbox series s digital edition"
+    ]):
         uniform_name = "Xbox Series X/S"
         categories.append("Microsoft")
-    elif "xbox one" in name:
+    elif any(term in name for term in ["xbox one", "xbox one s", "xbox one x"]):
         uniform_name = "Xbox One"
         categories.append("Microsoft")
     elif "xbox 360" in name:
@@ -36,24 +44,28 @@ def uniformize_name_and_category(name):
         categories.append("Microsoft")
 
     # Nintendo
-    elif any(term in name for term in ["switch", "nintendo switch", "switch lite", "switch oled"]):
+    elif any(term in name for term in [
+        "switch", "nintendo switch", "switch lite", "switch oled", "switch animal crossing edition"
+    ]):
         uniform_name = "Nintendo Switch"
         categories.append("Nintendo")
     elif any(term in name for term in ["wii", "nintendo wii", "wii u", "wii mini"]):
         uniform_name = "Nintendo Wii"
         categories.append("Nintendo")
-    elif any(term in name for term in ["gamecube", "nintendo gamecube"]):
+    elif "gamecube" in name:
         uniform_name = "Nintendo GameCube"
         categories.append("Nintendo")
     elif any(term in name for term in ["nintendo 64", "n64"]):
         uniform_name = "Nintendo 64"
         categories.append("Nintendo")
-    elif any(term in name for term in ["nes", "nintendo nes", "classic mini nes"]):
+    elif any(term in name for term in ["nes", "nintendo nes"]):
         uniform_name = "Nintendo NES"
         categories.append("Nintendo")
 
     # Retrogaming
-    elif any(term in name for term in ["sega", "megadrive", "master system", "dreamcast", "saturn"]):
+    elif any(term in name for term in [
+        "sega", "megadrive", "master system", "dreamcast", "saturn"
+    ]):
         uniform_name = "Sega Consoles"
         categories.append("Retrogaming")
     elif any(term in name for term in ["atari", "atari flashback", "atari 2600"]):
@@ -63,7 +75,7 @@ def uniformize_name_and_category(name):
         uniform_name = "Neo-Geo"
         categories.append("Retrogaming")
 
-    return uniform_name, categories
+    return uniform_name, ", ".join(categories)  # Convertir les catégories en chaîne de caractères
 
 
 class MicromaniaSpider(scrapy.Spider):
@@ -93,7 +105,7 @@ class MicromaniaSpider(scrapy.Spider):
                 if not uniform_name:  # Si le nom uniformisé est null, ignorer cet article
                     continue
                 item['name'] = uniform_name
-                item['category'] = categories
+                item['category'] = categories  # Catégories enregistrées comme chaîne de caractères
             else:
                 continue  # Si aucun nom brut, ignorer l'article
 
@@ -104,7 +116,7 @@ class MicromaniaSpider(scrapy.Spider):
             item['price'] = raw_price.strip().replace('\n', '')
 
             # URL du produit
-            relative_url = product.xpath('//a[@class="product-name-link pdp-link tile-text-transform-none"]/@href').get()
+            relative_url = product.xpath('.//a[@class="product-name-link pdp-link tile-text-transform-none"]/@href').get()
             item['url'] = response.urljoin(relative_url) if relative_url else None
 
             # Nom du site

@@ -75,7 +75,7 @@ def uniformize_name_and_category(name):
         uniform_name = "Neo-Geo"
         categories.append("Retrogaming")
 
-    return uniform_name, categories
+    return uniform_name, ", ".join(categories)  # Convertir les catégories en chaîne de caractères
 
 class EbaySpider(scrapy.Spider):
     name = 'ebay_spider'
@@ -103,7 +103,7 @@ class EbaySpider(scrapy.Spider):
                 if not uniform_name:  # Si le nom uniformisé est null, ignorer cet article
                     continue
                 item['name'] = uniform_name
-                item['category'] = categories
+                item['category'] = categories  # Catégories enregistrées comme chaîne de caractères
             else:
                 continue  # Si aucun nom brut, ignorer l'article
 
