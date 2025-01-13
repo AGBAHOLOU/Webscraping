@@ -2,7 +2,7 @@
 include 'database.php';
 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$limit = 30; 
+$limit = 40; 
 $offset = ($page - 1) * $limit;
 
 $query = "SELECT * FROM articles LIMIT $limit OFFSET $offset";

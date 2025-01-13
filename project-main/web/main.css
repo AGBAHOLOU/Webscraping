@@ -1,8 +1,10 @@
+/* Mise à jour du fichier main.css */
+
 body {
     padding: 0;
     margin: 0;
 }
- 
+
 h1 {
     width: 100vw;
     padding: 20px 0px;
@@ -10,7 +12,7 @@ h1 {
     text-align: center;
     background-color: hsl(26, 89%, 50%);
 }
- 
+
 /* Conteneur principal des cartes */
 .container {
     display: flex;
@@ -81,26 +83,21 @@ h1 {
     text-decoration: underline;
 }
 
-.pagination a {
-    text-decoration: none;
-    color: #007bff;
-    margin: 0 5px;
-}
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
     gap: 10px;
+    margin-top: 20px;
 }
 
 .pagination__link {
     display: inline-block;
-    padding: 8px 12px;
+    padding: 10px 15px;
     font-size: 14px;
     color: #007bff;
     border: 1px solid #007bff;
-    border-radius: 4px;
+    border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -118,4 +115,44 @@ h1 {
     cursor: default;
 }
 
+.pagination__dots {
+    font-size: 14px;
+    color: #555;
+    padding: 10px;
+}
 
+/* Champs de filtre */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+form label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: hsl(26, 89%, 50%);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: hsl(26, 89%, 40%);
+}

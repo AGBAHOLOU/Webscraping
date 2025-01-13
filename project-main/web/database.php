@@ -1,101 +1,43 @@
 <?php
 
-class Database
-{
-    private static $instance;
-    private $mysqli;
+class Database {
+    private static $instance = null;
+    private $connection;
 
-    private function __construct($host, $dbname, $username, $password)
-    {
-        // Enable detailed error reporting for debugging
-        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    // Constructeur privé pour le singleton
+    private function __construct($host, $dbname, $username, $password) {
+        $this->connection = new mysqli($host, $username, $password, $dbname);
 
-        // Connect to the database using TCP/IP to avoid socket issues
-        $this->mysqli = new mysqli($host, $username, $password, $dbname);
-
-        // Check for connection errors
-        if ($this->mysqli->connect_error) {
-            die('Connect Error (' . $this->mysqli->connect_errno . ') ' . $this->mysqli->connect_error);
+        if ($this->connection->connect_error) {
+            die("Erreur de connexion : " . $this->connection->connect_error);
         }
     }
 
-    public static function getInstance($host, $dbname, $username, $password)
-    {
-        // Create an instance if it doesn't exist
+    // Méthode pour récupérer l'instance unique
+    public static function getInstance($host, $dbname, $username, $password) {
         if (self::$instance === null) {
-            self::$instance = new self($host, $dbname, $username, $password);
+            self::$instance = new Database($host, $dbname, $username, $password);
         }
-
         return self::$instance;
     }
 
-    public function query($query, $values = [])
-    {
-        // Prepare the query
-        $stmt = $this->mysqli->prepare($query);
-        if (!$stmt) {
-            die('Query preparation error: ' . $this->mysqli->error);
+    // Méthode pour exécuter une requête
+    public function query($sql, $params = []) {
+        $stmt = $this->connection->prepare($sql);
+
+        if ($params) {
+            $types = str_repeat('s', count($params));
+            $stmt->bind_param($types, ...$params);
         }
 
-        // Bind parameters if they exist
-        if ($values) {
-            $types = str_repeat('s', count($values));
-            $stmt->bind_param($types, ...$values);
-        }
-
-        // Execute the statement
         $stmt->execute();
-
-        // Fetch the result
         $result = $stmt->get_result();
-        if ($result === false) {
-            // Return the number of rows affected for non-SELECT queries
-            return $stmt->affected_rows;
-        } else {
-            // Return the fetched rows for SELECT queries
+
+        if ($result) {
             return $result->fetch_all(MYSQLI_ASSOC);
         }
-    }
 
-    public function select($table, $columns = '*', $where = '', $orderby = '')
-    {
-        // Build the SELECT query
-        $query = "SELECT $columns FROM $table";
-        if ($where != '') {
-            $query .= " WHERE $where";
-        }
-
-        if ($orderby != '') {
-            $query .= " ORDER BY $orderby";
-        }
-
-        // Perform the SELECT query
-        return $this->query($query);
-    }
-
-    public function select_games()
-    {
-        // Correct the SQL query based on your database structure
-        $query = "
-        SELECT *
-        FROM articles
-        ORDER BY name
-        ";
-
-        // Perform the SELECT query
-        return $this->query($query);
-    }
-
-    public function insert($table, $values)
-    {
-        // Build the INSERT query
-        $columns = implode(', ', array_keys($values));
-        $placeholders = '?' . str_repeat(', ?', count($values) - 1);
-        $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
-
-        // Perform the INSERT query
-        return $this->query($query, array_values($values));
+        return [];
     }
 }
-
 ?>

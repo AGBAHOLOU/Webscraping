@@ -3,40 +3,37 @@ include 'database.php';
 
 try {
     // Connexion à la base de données
-    $db = Database::getInstance('bdd', 'comparatordb0', 'user', 'passwordUser0');
+    $db = Database::getInstance('mysql', 'comparatordb0', 'user', 'passwordUser0');
 
-    // Initialisation des filtres
-    $category = isset($_GET['category']) ? $_GET['category'] : '';
-    $name = isset($_GET['name']) ? $_GET['name'] : '';
+    // Initialisation du filtre unique
+    $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
     $price_min = isset($_GET['price_min']) && $_GET['price_min'] !== '' ? floatval($_GET['price_min']) : null;
     $price_max = isset($_GET['price_max']) && $_GET['price_max'] !== '' ? floatval($_GET['price_max']) : null;
 
     // Pagination
-    $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
-    $limit = 30; // Articles par page
-    $offset = ($page - 1) * $limit;
+    $itemsPerPage = 40;
+    $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+    $offset = ($page - 1) * $itemsPerPage;
 
-    // Récupération des catégories pour la liste déroulante
-    $categories = $db->query("SELECT DISTINCT category FROM articles");
-
-    // Récupération des noms correspondant à la catégorie sélectionnée
-    $names = [];
-    if ($category) {
-        $names = $db->query("SELECT DISTINCT name FROM articles WHERE category = ?", [$category]);
-    }
+    // Récupération des catégories et noms pour le filtre combiné
+    $options = $db->query("SELECT DISTINCT category, name FROM articles ORDER BY category, name");
 
     // Construction de la requête SQL dynamique
     $query = "SELECT * FROM articles WHERE 1=1";
     $params = [];
 
-    if ($category) {
-        $query .= " AND category = ?";
-        $params[] = $category;
+    if ($filter) {
+        list($category, $name) = explode('|', $filter);
+        if ($category) {
+            $query .= " AND category = ?";
+            $params[] = $category;
+        }
+        if ($name) {
+            $query .= " AND name = ?";
+            $params[] = $name;
+        }
     }
-    if ($name) {
-        $query .= " AND name = ?";
-        $params[] = $name;
-    }
+
     if ($price_min !== null) {
         $query .= " AND price >= ?";
         $params[] = $price_min;
@@ -46,37 +43,55 @@ try {
         $params[] = $price_max;
     }
 
-    // Ajout du tri par prix croissant et gestion de la pagination
-    $query .= " ORDER BY price ASC LIMIT $limit OFFSET $offset";
+    // Ajout de la pagination
+    $query .= " ORDER BY price ASC LIMIT $offset, $itemsPerPage";
 
     // Exécution de la requête
     $games = $db->query($query, $params);
 
-    // Calcul du nombre total de pages
-    $total_query = "SELECT COUNT(*) as total FROM articles WHERE 1=1";
-    $total_result = $db->query($total_query, $params);
-    $total_articles = $total_result[0]['total'];
-    $total_pages = ceil($total_articles / $limit);
+    // Récupération du total pour la pagination
+    $countQuery = "SELECT COUNT(*) as total FROM articles WHERE 1=1";
+    if ($filter) {
+        if ($category) {
+            $countQuery .= " AND category = ?";
+        }
+        if ($name) {
+            $countQuery .= " AND name = ?";
+        }
+    }
+    if ($price_min !== null) {
+        $countQuery .= " AND price >= ?";
+    }
+    if ($price_max !== null) {
+        $countQuery .= " AND price <= ?";
+    }
 
-    // Affichage du formulaire pour les filtres
+    $totalItems = $db->query($countQuery, $params)[0]['total'];
+    $totalPages = ceil($totalItems / $itemsPerPage);
+
+    // Affichage du formulaire pour le filtre combiné
     echo "<link rel='stylesheet' href='main.css'>";
     echo "<form method='GET' style='text-align:center; margin-bottom:20px;'>";
-    echo "Catégorie : <select name='category' id='category'>";
-    echo "<option value=''>Toutes</option>";
-    foreach ($categories as $cat) {
-        $selected = ($cat['category'] === $category) ? "selected" : "";
-        echo "<option value='{$cat['category']}' $selected>{$cat['category']}</option>";
-    }
-    echo "</select>";
-
-    echo " Nom : <select name='name' id='name'>";
+    echo "Filtrer par : <select name='filter' id='filter'>";
     echo "<option value=''>Tous</option>";
-    foreach ($names as $n) {
-        $selected = ($n['name'] === $name) ? "selected" : "";
-        echo "<option value='{$n['name']}' $selected>{$n['name']}</option>";
-    }
-    echo "</select>";
 
+    $currentCategory = '';
+    foreach ($options as $option) {
+        if ($option['category'] !== $currentCategory) {
+            if ($currentCategory !== '') {
+                echo "</optgroup>";
+            }
+            $currentCategory = $option['category'];
+            echo "<optgroup label='{$currentCategory}'>";
+        }
+        $selected = ($filter === "{$option['category']}|{$option['name']}") ? "selected" : "";
+        echo "<option value='{$option['category']}|{$option['name']}' $selected>{$option['name']}</option>";
+    }
+    if ($currentCategory !== '') {
+        echo "</optgroup>";
+    }
+
+    echo "</select>";
     echo " Prix min : <input type='number' step='0.01' name='price_min' value='" . ($price_min !== null ? htmlspecialchars($price_min) : '') . "'>";
     echo " Prix max : <input type='number' step='0.01' name='price_max' value='" . ($price_max !== null ? htmlspecialchars($price_max) : '') . "'>";
     echo " <button type='submit'>Filtrer</button>";
@@ -100,42 +115,40 @@ try {
     }
     echo "</div>";
 
-    // Affichage des liens de pagination
-    echo "<div class='pagination'>";
+    // Affichage de la pagination
+    echo "<div class='pagination' style='text-align: center; margin-top: 20px;'>";
     if ($page > 1) {
-        $prev_page = $page - 1;
-        echo "<a href='?page=$prev_page' class='pagination__link pagination__arrow'>&lt;</a>";
+        echo "<a href='?" . http_build_query(array_merge($_GET, ['page' => $page - 1])) . "' class='pagination__link'>« Précédent</a>";
     }
 
-    // Nombre maximal de pages affichées autour de la page actuelle
-    $max_links = 5;
-    $start_page = max(1, $page - floor($max_links / 2));
-    $end_page = min($total_pages, $start_page + $max_links - 1);
+    $maxPagesToShow = 5;
+    $startPage = max(1, $page - floor($maxPagesToShow / 2));
+    $endPage = min($totalPages, $startPage + $maxPagesToShow - 1);
 
-    if ($start_page > 1) {
-        echo "<a href='?page=1' class='pagination__link'>1</a>";
-        if ($start_page > 2) {
+    if ($startPage > 1) {
+        echo "<a href='?" . http_build_query(array_merge($_GET, ['page' => 1])) . "' class='pagination__link'>1</a>";
+        if ($startPage > 2) {
             echo "<span class='pagination__dots'>...</span>";
         }
     }
 
-    for ($i = $start_page; $i <= $end_page; $i++) {
-        $active = ($i == $page) ? "pagination__link--active" : "";
-        echo "<a href='?page=$i' class='pagination__link $active'>$i</a>";
+    for ($i = $startPage; $i <= $endPage; $i++) {
+        $activeClass = $i == $page ? 'pagination__link--active' : '';
+        echo "<a href='?" . http_build_query(array_merge($_GET, ['page' => $i])) . "' class='pagination__link $activeClass'>$i</a>";
     }
 
-    if ($end_page < $total_pages) {
-        if ($end_page < $total_pages - 1) {
+    if ($endPage < $totalPages) {
+        if ($endPage < $totalPages - 1) {
             echo "<span class='pagination__dots'>...</span>";
         }
-        echo "<a href='?page=$total_pages' class='pagination__link'>$total_pages</a>";
+        echo "<a href='?" . http_build_query(array_merge($_GET, ['page' => $totalPages])) . "' class='pagination__link'>$totalPages</a>";
     }
 
-    if ($page < $total_pages) {
-        $next_page = $page + 1;
-        echo "<a href='?page=$next_page' class='pagination__link pagination__arrow'>&gt;</a>";
+    if ($page < $totalPages) {
+        echo "<a href='?" . http_build_query(array_merge($_GET, ['page' => $page + 1])) . "' class='pagination__link'>Suivant »</a>";
     }
     echo "</div>";
+
 } catch (Exception $e) {
     echo "Erreur : " . $e->getMessage();
 }
