@@ -2,22 +2,10 @@
 # Ajouter cette ligne au fichier .gitignore
 .scrapy/
 __pycache__/
-# Fichiers temporaires et générés par MySQL ou le système
-*.tmp
-*.ibt
-*.ibd
-*.cnf
-ibdata*
-ibtmp*
-undo_*
 
-# Logs binaires et fichiers spécifiques à MySQL
-binlog.*
-#innodb_redo/
 
 # Ignorer les répertoires de caches Python
 *.pyc
 __pycache__/
 
-# Ignorer les logs généraux
-*.log
+
