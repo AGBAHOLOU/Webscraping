@@ -11,6 +11,11 @@ try {
     $price_min = isset($_GET['price_min']) && $_GET['price_min'] !== '' ? floatval($_GET['price_min']) : null;
     $price_max = isset($_GET['price_max']) && $_GET['price_max'] !== '' ? floatval($_GET['price_max']) : null;
 
+    // Pagination
+    $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+    $limit = 30; // Articles par page
+    $offset = ($page - 1) * $limit;
+
     // Récupération des catégories pour la liste déroulante
     $categories = $db->query("SELECT DISTINCT category FROM articles");
 
@@ -41,11 +46,17 @@ try {
         $params[] = $price_max;
     }
 
-    // Ajout du tri par prix croissant
-    $query .= " ORDER BY price ASC";
+    // Ajout du tri par prix croissant et gestion de la pagination
+    $query .= " ORDER BY price ASC LIMIT $limit OFFSET $offset";
 
     // Exécution de la requête
     $games = $db->query($query, $params);
+
+    // Calcul du nombre total de pages
+    $total_query = "SELECT COUNT(*) as total FROM articles WHERE 1=1";
+    $total_result = $db->query($total_query, $params);
+    $total_articles = $total_result[0]['total'];
+    $total_pages = ceil($total_articles / $limit);
 
     // Affichage du formulaire pour les filtres
     echo "<link rel='stylesheet' href='main.css'>";
@@ -88,33 +99,44 @@ try {
         echo "<p style='text-align:center; width:100%;'>Aucun résultat trouvé pour cette recherche.</p>";
     }
     echo "</div>";
+
+    // Affichage des liens de pagination
+    echo "<div class='pagination'>";
+    if ($page > 1) {
+        $prev_page = $page - 1;
+        echo "<a href='?page=$prev_page' class='pagination__link pagination__arrow'>&lt;</a>";
+    }
+
+    // Nombre maximal de pages affichées autour de la page actuelle
+    $max_links = 5;
+    $start_page = max(1, $page - floor($max_links / 2));
+    $end_page = min($total_pages, $start_page + $max_links - 1);
+
+    if ($start_page > 1) {
+        echo "<a href='?page=1' class='pagination__link'>1</a>";
+        if ($start_page > 2) {
+            echo "<span class='pagination__dots'>...</span>";
+        }
+    }
+
+    for ($i = $start_page; $i <= $end_page; $i++) {
+        $active = ($i == $page) ? "pagination__link--active" : "";
+        echo "<a href='?page=$i' class='pagination__link $active'>$i</a>";
+    }
+
+    if ($end_page < $total_pages) {
+        if ($end_page < $total_pages - 1) {
+            echo "<span class='pagination__dots'>...</span>";
+        }
+        echo "<a href='?page=$total_pages' class='pagination__link'>$total_pages</a>";
+    }
+
+    if ($page < $total_pages) {
+        $next_page = $page + 1;
+        echo "<a href='?page=$next_page' class='pagination__link pagination__arrow'>&gt;</a>";
+    }
+    echo "</div>";
 } catch (Exception $e) {
     echo "Erreur : " . $e->getMessage();
 }
 ?>
-
-<script>
-// JavaScript pour mettre à jour la liste des noms dynamiquement
-document.getElementById('category').addEventListener('change', function () {
-    const category = this.value;
-    const nameSelect = document.getElementById('name');
-
-    // Réinitialisation des options
-    nameSelect.innerHTML = "<option value=''>Tous</option>";
-
-    // Appel AJAX pour récupérer les noms
-    if (category) {
-        fetch(`fetch_names.php?category=${category}`)
-            .then(response => response.json())
-            .then(data => {
-                data.forEach(name => {
-                    const option = document.createElement('option');
-                    option.value = name.name;
-                    option.textContent = name.name;
-                    nameSelect.appendChild(option);
-                });
-            })
-            .catch(error => console.error('Erreur:', error));
-    }
-});
-</script>
